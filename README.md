@@ -25,5 +25,5 @@ Simply download Swagger UI and extract the *index.html* (other files are not nec
 Then, provide the resource path to you index file as follows:
 
 ```Scala
-new SwaggerUiRoute("api", "/api/index.html").route
+new SwaggerUiRoute("api", Some("/api/index.html")).route
 ```
