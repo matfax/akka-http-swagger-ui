@@ -1,5 +1,6 @@
 # Swagger UI for Akka-HTTP
 [![](https://jitpack.io/v/matfax/akka-http-swagger-ui.svg)](https://jitpack.io/#matfax/akka-http-swagger-ui)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4a084fc73bce461b9de2cebfc38866c6)](https://www.codacy.com/app/matfax/akka-http-swagger-ui?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=matfax/akka-http-swagger-ui&amp;utm_campaign=Badge_Grade)
 
 If you are using [Swagger-Akka-Http](https://github.com/swagger-akka-http/swagger-akka-http), this library lets you easily add a route to Swagger UI without adding all the files to your repository.
 
