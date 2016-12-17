@@ -3,17 +3,8 @@
   <component name="AndroidDexCompilerConfiguration">
     <option name="MAX_HEAP_SIZE" value="1024" />
   </component>
-  <component name="ComposerJsonPluginSettings">
-    <unboundedVersionInspectionSettings>
-      <excludedPackages />
-    </unboundedVersionInspectionSettings>
-    <customRepositories />
-  </component>
   <component name="FlexCompilerConfiguration">
     <option name="HEAP_SIZE_MB" value="1024" />
-  </component>
-  <component name="JUnitGeneratorProjectSettings">
-    <option name="selectedTemplateKey" value="JUnit 4" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">

@@ -11,7 +11,7 @@ import scala.io.{Codec, Source}
   * The specification for ``SwaggerUiRoute``.
   *
   * @author Matthias Fax
-  * @version 1.0.0
+  * @version 1.0.1
   */
 class SwaggerUiRouteSpec extends WordSpec with Matchers with ScalatestRouteTest {
 
