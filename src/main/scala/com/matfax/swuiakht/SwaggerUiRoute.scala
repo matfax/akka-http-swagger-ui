@@ -19,26 +19,31 @@ import akka.http.scaladsl.server.{Directives, Route}
 class SwaggerUiRoute(prefixPath: String, replacedIndex: Option[String] = None) extends Directives {
 
   /**
+    * The slash char.
+    */
+  val sls = "/"
+
+  /**
     * The folder name of Swagger UI in the resource folder.
     */
-  protected val SwaggerUiResourcePath = "swagger-ui"
+  protected val swaggerUiResourcePath = "swagger-ui"
 
   /**
     * Route to Swagger UI.
     */
   val route: Route = {
 
-    val strippedPrefixPath = prefixPath.stripPrefix("/").stripSuffix("/")
+    val strippedPrefixPath = prefixPath.stripPrefix(sls).stripSuffix(sls)
 
     pathPrefix(strippedPrefixPath) {
       pathSingleSlash {
-        val indexResource: String = replacedIndex.getOrElse(s"$SwaggerUiResourcePath/index.html").stripPrefix("/")
+        val indexResource: String = replacedIndex.getOrElse(s"$swaggerUiResourcePath/index.html").stripPrefix(sls)
         getFromResource(indexResource)
       } ~
         pathEnd {
           redirect(uri = s"/$strippedPrefixPath/", redirectionType = StatusCodes.MovedPermanently)
         } ~
-        getFromResourceDirectory(SwaggerUiResourcePath)
+        getFromResourceDirectory(swaggerUiResourcePath)
     }
   }
 }

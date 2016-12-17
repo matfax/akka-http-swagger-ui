@@ -18,27 +18,32 @@ class SwaggerUiRouteSpec extends WordSpec with Matchers with ScalatestRouteTest 
   /**
     * The default name of the folder that contains the Swagger UI files.
     */
-  val DefaultResourcePrefix = "/swagger-ui"
+  val defaultResourcePrefix = "/swagger-ui"
 
   /**
     * A custom URI prefix.
     */
-  val PathPrefix = "/custom-prefix"
+  val pathPrefix = "/custom-prefix"
 
   /**
     * The file name of the Swagger UI index file.
     */
-  val IndexFile = "index.html"
+  val indexFile = "index.html"
 
   /**
     * The file name of the Swagger UI JS file.
     */
-  val JsFile = "swagger-ui.js"
+  val jsFile = "swagger-ui.js"
 
   /**
     * A custom index file to test against.
     */
-  val CustomIndex = s"/api/$IndexFile"
+  val customIndex = s"/api/$indexFile"
+
+  /**
+    * The slash char.
+    */
+  val sls = "/"
 
   /**
     * The file codec for the resource stream.
@@ -57,17 +62,17 @@ class SwaggerUiRouteSpec extends WordSpec with Matchers with ScalatestRouteTest 
       val source = Source.fromInputStream(fileStream)
       val fileContent = try source.mkString
       finally source.close()
-      Get(s"$PathPrefix/") ~> serviceRoute ~> check {
+      Get(s"$pathPrefix/") ~> serviceRoute ~> check {
         responseAs[String] shouldEqual fileContent
       }
     }
 
     "return the valid Swagger JS file" in {
-      val fileStream = getClass.getResourceAsStream(s"$DefaultResourcePrefix/$JsFile")
+      val fileStream = getClass.getResourceAsStream(s"$defaultResourcePrefix/$jsFile")
       val source = Source.fromInputStream(fileStream)
       val fileContent = try source.mkString
       finally source.close()
-      Get(s"$PathPrefix/$JsFile") ~> serviceRoute ~> check {
+      Get(s"$pathPrefix/$jsFile") ~> serviceRoute ~> check {
         responseAs[String] shouldEqual fileContent
       }
     }
@@ -77,67 +82,67 @@ class SwaggerUiRouteSpec extends WordSpec with Matchers with ScalatestRouteTest 
       val source = Source.fromInputStream(fileStream)
       val fileContent = try source.mkString
       finally source.close()
-      Get(s"$PathPrefix") ~> serviceRoute ~> check {
+      Get(s"$pathPrefix") ~> serviceRoute ~> check {
         status.isRedirection() shouldEqual true
         status shouldEqual StatusCodes.MovedPermanently
         responseAs[String] shouldEqual "This and all future requests should be directed to <a href=\"" +
-          PathPrefix + "/\">this URI</a>."
+          pathPrefix + "/\">this URI</a>."
       }
     }
   }
 
   "The common Swagger UI service (URI path: leading slash)" should {
 
-    val commonSwaggerUiRoute: Route = new SwaggerUiRoute(PathPrefix).route
+    val commonSwaggerUiRoute: Route = new SwaggerUiRoute(pathPrefix).route
 
     behave like createSwaggerUiRouteTests(
       serviceRoute = commonSwaggerUiRoute,
-      index = s"$DefaultResourcePrefix/$IndexFile"
+      index = s"$defaultResourcePrefix/$indexFile"
     )
 
   }
 
   "The custom Swagger UI service (index path: leading slash, URI path: leading slash)" should {
 
-    val customSwaggerUiRoute: Route = new SwaggerUiRoute(PathPrefix, Some(CustomIndex)).route
+    val customSwaggerUiRoute: Route = new SwaggerUiRoute(pathPrefix, Some(customIndex)).route
 
-    behave like createSwaggerUiRouteTests(serviceRoute = customSwaggerUiRoute, index = CustomIndex)
+    behave like createSwaggerUiRouteTests(serviceRoute = customSwaggerUiRoute, index = customIndex)
 
   }
 
   "The custom Swagger UI service (URI path: leading slash)" should {
 
-    val customSwaggerUiRoute: Route = new SwaggerUiRoute(PathPrefix, Some(CustomIndex.stripPrefix("/"))).route
+    val customSwaggerUiRoute: Route = new SwaggerUiRoute(pathPrefix, Some(customIndex.stripPrefix(sls))).route
 
-    behave like createSwaggerUiRouteTests(serviceRoute = customSwaggerUiRoute, index = CustomIndex)
+    behave like createSwaggerUiRouteTests(serviceRoute = customSwaggerUiRoute, index = customIndex)
 
   }
 
   "The common Swagger UI service" should {
 
-    val commonSwaggerUiRoute: Route = new SwaggerUiRoute(PathPrefix.stripPrefix("/")).route
+    val commonSwaggerUiRoute: Route = new SwaggerUiRoute(pathPrefix.stripPrefix(sls)).route
 
     behave like createSwaggerUiRouteTests(
       serviceRoute = commonSwaggerUiRoute,
-      index = s"$DefaultResourcePrefix/$IndexFile"
+      index = s"$defaultResourcePrefix/$indexFile"
     )
 
   }
 
   "The custom Swagger UI service (index path: leading slash)" should {
 
-    val customSwaggerUiRoute: Route = new SwaggerUiRoute(PathPrefix.stripPrefix("/"), Some(CustomIndex)).route
+    val customSwaggerUiRoute: Route = new SwaggerUiRoute(pathPrefix.stripPrefix(sls), Some(customIndex)).route
 
-    behave like createSwaggerUiRouteTests(serviceRoute = customSwaggerUiRoute, index = CustomIndex)
+    behave like createSwaggerUiRouteTests(serviceRoute = customSwaggerUiRoute, index = customIndex)
 
   }
 
   "The custom Swagger UI service" should {
 
     val customSwaggerUiRoute: Route =
-      new SwaggerUiRoute(PathPrefix.stripPrefix("/"), Some(CustomIndex.stripPrefix("/"))).route
+      new SwaggerUiRoute(pathPrefix.stripPrefix(sls), Some(customIndex.stripPrefix(sls))).route
 
-    behave like createSwaggerUiRouteTests(serviceRoute = customSwaggerUiRoute, index = CustomIndex)
+    behave like createSwaggerUiRouteTests(serviceRoute = customSwaggerUiRoute, index = customIndex)
 
   }
 

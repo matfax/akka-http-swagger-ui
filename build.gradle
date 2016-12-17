@@ -89,6 +89,7 @@ scmVersion {
     }
     hooks {
         pre 'fileUpdate', [files: sourceFiles, pattern: { v, c -> /@version $v/ }, replacement: { v, c -> "@version $v" }]
-        pre 'commit'
+        pre 'commit', {v, p -> "Bumping to version $v"}
+        post 'push'
     }
 }
