@@ -48,7 +48,7 @@ class SwaggerUiRouteSpec extends WordSpec with Matchers with ScalatestRouteTest 
   /**
     * The file codec for the resource stream.
     */
-  implicit val FileCodec: Codec = "UTF-8"
+  implicit val fileCodec: Codec = "UTF-8"
 
   /**
     * Creates a test suite for a Swagger UI route.
