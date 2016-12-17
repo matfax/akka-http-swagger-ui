@@ -92,4 +92,7 @@ scmVersion {
         pre 'commit', {v, p -> "Bumping to version $v"}
         post 'push'
     }
+    checks {
+        snapshotDependencies = false
+    }
 }
