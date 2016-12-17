@@ -14,7 +14,7 @@ import akka.http.scaladsl.server.{Directives, Route}
   * @param replacedIndex ``Some`` path to your own Swagger UI index file, or ``None``
   *
   * @author Matthias Fax
-  * @version 0.1.0
+  * @version 1.0.0
   */
 class SwaggerUiRoute(prefixPath: String, replacedIndex: Option[String] = None) extends Directives {
 
