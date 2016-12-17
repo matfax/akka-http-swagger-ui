@@ -1,4 +1,6 @@
 # Swagger UI for Akka-HTTP
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4a084fc73bce461b9de2cebfc38866c6)](https://www.codacy.com/app/matfax/akka-http-swagger-ui?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=matfax/akka-http-swagger-ui&amp;utm_campaign=badger)
 [![](https://jitpack.io/v/matfax/akka-http-swagger-ui.svg)](https://jitpack.io/#matfax/akka-http-swagger-ui)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4a084fc73bce461b9de2cebfc38866c6)](https://www.codacy.com/app/matfax/akka-http-swagger-ui?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=matfax/akka-http-swagger-ui&amp;utm_campaign=Badge_Grade)
 
