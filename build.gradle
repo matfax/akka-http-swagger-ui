@@ -15,7 +15,6 @@ plugins {
     id 'java'
     id 'scala'
     id 'idea'
-    id 'pl.allegro.tech.build.axion-release' version '1.4.1'
     id "com.github.maiflai.scalatest" version "0.14"
     id 'nu.studer.credentials' version '1.0.3'
 }
@@ -78,20 +77,4 @@ def getFolderFiles(path, suffix) {
         }
     }
     return fileList
-}
-
-def sourceFiles = getFolderFiles("$rootDir/src/", ".scala")
-
-scmVersion {
-    tag {
-        prefix = 'swuiakht'
-    }
-    hooks {
-        pre 'fileUpdate', [files: sourceFiles, pattern: { v, c -> /@version $v/ }, replacement: { v, c -> "@version $v" }]
-        pre 'commit'
-    }
-    repository {
-        customUsername = System.getenv("GITHUB_USERNAME") ?: credentials.githubUsername
-        customPassword = System.getenv("GITHUB_PASSWORD") ?: credentials.githubPassword
-    }
 }
